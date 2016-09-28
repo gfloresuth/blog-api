@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <title>Update test</title>
+    <script src="jquery-3.1.1.min.js"></script>
+    <script src="update_test.js"></script>
+    <meta content="">
+    <style>
+        #divForm {
+            display:none; /* hidden when loaded */
+        }
+    </style>
+  </head>
+  <body>
+    <div id="divList">
+    
+    </div>
+    <div id="divForm">
+    <form method="post" id="frmArticle" onsubmit="return updateArticle()">
+        <input type="hidden" id="txtId" name="id">
+        <input type="text" id="txtTitle" name="title"><br>
+        <input type="text" id="txtBody" name="body"><br>
+        <input type="text" id="txtAuthor" name="author"><br>
+        <input type="submit" value="Update">
+    </form>
+    </div>
+  </body>
+</html>

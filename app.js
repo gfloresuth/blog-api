@@ -63,18 +63,32 @@ app.use(function(err, req, res, next){
 
 
 //routes
-app.get('/',function(req,res){
-	res.send("blog-api up and running");
-});
+//app.get('/',function(req,res){
+//	res.send("blog-api up and running");
+//});
+
+
+app.use('/',express.static(__dirname+'/public/'));
+
+
 
 /* GET /api/article */
 app.get('/api/article',function(req,res){
 	new Article().fetchAll()
 	.then(function(articles){
-		res.send(articles.toJSON());
+        var data = {
+            "status":200,
+            "message":"Ok",
+            "content":articles
+        };
+		res.json(data);
 	}).catch(function(error){
+        var data = {
+                "status":400,
+                "message":"Error retrieving articles"
+            };
 		console.log(error);
-		res.send('An error occured');
+		res.json(data);
 	});
 });
 
@@ -85,7 +99,7 @@ app.get('/api/article/:article_id',function(req,res){
 	.fetch()
 	.then(function(article){
         var data;
-        if (article == null){
+        if (article === null){
             data = {
                 "status":400,
                 "message":"Errorretrieving article"
@@ -101,11 +115,51 @@ app.get('/api/article/:article_id',function(req,res){
 	}).catch(function(error){
         var data = {
                 "status":400,
-                "message":"Errorretrieving article"
+                "message":"Error retrieving article"
             };
 		console.log(error);
 		res.json(data);
 	});
+});
+
+
+/* POST /api/article/:article_id */
+
+app.post('/api/article/update/:article_id',function(req,res){
+	var article_id=req.params.article_id;
+	new Article().where('id',article_id)
+	.fetch()
+	.then(function(article){
+        var data;
+        if(article!==null){
+            var data = {
+                "status":200,
+                "message":"Updated"
+            }
+            article.set({
+                title:req.body.title,
+                body:req.body.body,
+                author:req.body.author
+            });
+            article.save();
+            
+        }else{
+            var data = {
+                "status":400,
+                "message":"Error retrieving article"
+            };
+            console.log(error);
+        }
+        res.json(data);
+    }).catch(function(error){
+       var data = {
+                "status":400,
+                "message":"Error updating article"
+            };
+		console.log(error);
+		res.json(data);
+    });
+    
 });
 
 /* POST /api/article */
