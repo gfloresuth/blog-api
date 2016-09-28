@@ -10,11 +10,20 @@ var dbConfig={
     connection:{
 	 host:'localhost',
 	 user:'root',
-	 password:'your_password',
+	 password:'usbw',
 	 database:'blog',
 	 charset:'utf8'
   }
 };
+
+/*
+GET  /api/article
+GET  /api/article/:article_id
+POST /api/article
+
+*/ 
+
+
 var knex = require('knex')(dbConfig);
 var bookshelf = require('bookshelf')(knex);
 
@@ -27,7 +36,8 @@ var allowCrossDomain=function(req,res,next){
 
 app.use(allowCrossDomain);
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded())
+//app.use(bodyParser.urlencoded())
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json())
@@ -74,7 +84,11 @@ app.get('/api/article/:article_id',function(req,res){
 	new Article().where('id',article_id)
 	.fetch()
 	.then(function(article){
-		res.send(article.toJSON());
+        if (article == null){
+            res.send('Error retrieving article');            
+        }else{
+            res.json(article);
+        }
 	}).catch(function(error){
 		console.log(error);
 		res.send('Error retrieving article');
