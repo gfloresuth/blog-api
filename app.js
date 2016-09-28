@@ -84,14 +84,27 @@ app.get('/api/article/:article_id',function(req,res){
 	new Article().where('id',article_id)
 	.fetch()
 	.then(function(article){
+        var data;
         if (article == null){
-            res.send('Error retrieving article');            
+            data = {
+                "status":400,
+                "message":"Errorretrieving article"
+            };
         }else{
-            res.json(article);
+            data = {
+                "status":200,
+                "message":"Ok",
+                "content":article
+            };
         }
+        res.json(data);
 	}).catch(function(error){
+        var data = {
+                "status":400,
+                "message":"Errorretrieving article"
+            };
 		console.log(error);
-		res.send('Error retrieving article');
+		res.json(data);
 	});
 });
 
@@ -105,8 +118,12 @@ app.post('/api/article',function(req,res){
 	article.save().then(function(saved_article){
 		res.send(saved_article.toJSON());
 	}).catch(function(error){
+        var data = {
+                "status":400,
+                "message":"Error saving article"
+            };
 		console.log(error);
-		res.send('Error saving article')
+		res.json(data)
 	});
 });
 
