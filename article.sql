@@ -1,7 +1,7 @@
 create database if not exists blog;
 use blog;
 create table article (
-  id int not null primary key,
+  id int NOT NULL AUTO_INCREMENT primary key,
   title varchar(100) null,
   body text null,
   author varchar(100) null

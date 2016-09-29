@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Update test</title>
+    <title>List of articles</title>
     <script src="jquery-3.1.1.min.js"></script>
     <script src="update_test.js"></script>
     <meta content="">
@@ -14,12 +14,14 @@
     <div id="divList">
     
     </div>
+    <br>
+    <a href="/newarticle.html">New article</a><br>
     <div id="divForm">
     <form method="post" id="frmArticle" onsubmit="return updateArticle()">
         <input type="hidden" id="txtId" name="id">
-        <input type="text" id="txtTitle" name="title"><br>
-        <input type="text" id="txtBody" name="body"><br>
-        <input type="text" id="txtAuthor" name="author"><br>
+        Title: <input type="text" id="txtTitle" name="title"><br>
+        Body: <input type="text" id="txtBody" name="body"><br>
+        Author: <input type="text" id="txtAuthor" name="author"><br>
         <input type="submit" value="Update">
     </form>
     </div>

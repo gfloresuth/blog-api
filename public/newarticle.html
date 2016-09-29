@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>New Article</title>
+    <script src="jquery-3.1.1.min.js"></script>
+    <script src="new_article.js"></script>
+    <meta content="">
+    <style>
+       
+    </style>
+  </head>
+  <body>
+    <div id="divInfo">
+    
+    </div>
+    <div id="divForm">
+    <form method="post" id="frmArticle" onsubmit="return newArticle()">
+        Title: <input type="text" id="txtTitle" name="title"><br>
+        Body: <input type="text" id="txtBody" name="body"><br>
+        Author: <input type="text" id="txtAuthor" name="author"><br>
+        <input type="submit" value="Save">
+    </form>
+    </div>
+  </body>
+</html>

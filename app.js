@@ -164,13 +164,19 @@ app.post('/api/article/update/:article_id',function(req,res){
 
 /* POST /api/article */
 app.post('/api/article',function(req,res){
+    console.log(req.body.id);
 	var article=new Article({
 		title:req.body.title,
 		body:req.body.body,
 		author:req.body.author
 	});
 	article.save().then(function(saved_article){
-		res.send(saved_article.toJSON());
+        var data = {
+            "status":200,
+            "message":"Saved",
+            "content":saved_article
+        }
+		res.json(data);
 	}).catch(function(error){
         var data = {
                 "status":400,
