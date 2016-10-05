@@ -8,7 +8,7 @@ function loadArticles(){
         if(data.status==200){
             var allData =[];
             $.each(data.content,function(key,value){
-                allData.push(''+value.title+'<a href="#" onclick="getInfo('+value.id+')">Edit</a>');
+                allData.push(''+value.title+' <a href="#" onclick="getInfo('+value.id+')">Edit</a>');
             });
             $('#divList').html(allData.join('<br>'));
         }else{

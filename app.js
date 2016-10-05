@@ -8,18 +8,30 @@ var Promise  = require('bluebird');
 var dbConfig={
 	client:'mysql',
     connection:{
-	 host:'localhost',
-	 user:'root',
-	 password:'usbw',
-	 database:'blog',
-	 charset:'utf8'
-  }
+        host:'localhost',
+        user:'root',
+        password:'usbw',
+        database:'blog',
+        port: 3306,
+        charset:'utf8'
+    }
 };
 
 /*
-GET  /api/article
+http://localhost:3000/
+
+
+GET  /api/article/
+http://localhost:3000/api/article/
+
 GET  /api/article/:article_id
+http://localhost:3000/api/article/1
+
 POST /api/article
+http://localhost:3000/api/article/
+
+POST /api/article/update/:article_id
+http://localhost:3000//api/article/update/:1/
 
 */ 
 
